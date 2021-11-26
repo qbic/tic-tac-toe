@@ -53,11 +53,6 @@ fn check_for_win(state: &[char; 9]) -> bool {
         }
     }
 
-    if (state[0] == state[1])
-    {
-        break;
-    }
-
     if state[0] == state[4] && state[0] == state[8] ||
        state[2] == state[4] && state[2] == state[6] {
             return true;
