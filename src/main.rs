@@ -62,28 +62,24 @@ fn check_for_win(state: &[char; 9]) -> bool {
 }
 
 fn main() {
+    let players = [ 'X', 'O' ];
     let mut state = [ '1', '2', '3', '4', '5', '6', '7', '8', '9' ];
-    let mut turns: u32 = 0;
+    let mut turns = 0;
 
     loop {
-        let player = match turns % 2 {
-            0 => 'X',
-            1 => 'O',
-            _ => '?',
-        };
-
+        let player = players[turns % 2];
         draw(&state);
 
         // loop until we get a valid user response
         loop {
             let requested_number = get_input(player) - 1;
-            match state[requested_number] {
-                'X' | 'O' => println!("That field is allready taken by \'{}\'!", state[requested_number]),
-                _ => {
-                    state[requested_number] = player;
-                    break;
-                }
-            };   
+            if state[requested_number] == players[0] ||
+               state[requested_number] == players[1] {
+                println!("That field is allready taken by \'{}\'!", state[requested_number]);
+            } else {
+                state[requested_number] = player;
+                break;
+            }
         }
 
         if check_for_win(&state) {
